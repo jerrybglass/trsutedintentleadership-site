@@ -1,21 +1,502 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Trusted Intent</title>
+  <meta name="description" content="Trusted Intent is a leadership platform focused on becoming the kind of leader people trust at work and at home." />
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      text-align: center;
-      margin-top: 20%;
-      background-color: #0b0b0b;
-      color: #ffffff;
+    :root {
+      --bg: #0b0f14;
+      --panel: #121923;
+      --text: #f5f7fa;
+      --muted: #b7c0cc;
+      --line: rgba(255,255,255,0.12);
+      --accent: #c9a96a;
+      --accent-dark: #a78648;
+      --max: 1120px;
     }
-    h1 { font-size: 48px; }
-    p { font-size: 20px; color: #cccccc; }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(201,169,106,0.10), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(201,169,106,0.07), transparent 22%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .wrap {
+      width: min(100% - 32px, var(--max));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(10px);
+      background: rgba(11, 15, 20, 0.82);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 16px 0;
+      gap: 16px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.92rem;
+    }
+
+    .brand-mark {
+      width: 34px;
+      height: 34px;
+      border: 1px solid rgba(201,169,106,0.45);
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: var(--accent);
+      font-weight: 700;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .button,
+    button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 14px 20px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .button-primary {
+      background: var(--accent);
+      color: #111;
+    }
+
+    .button-primary:hover {
+      background: var(--accent-dark);
+      transform: translateY(-1px);
+    }
+
+    .button-secondary {
+      border-color: var(--line);
+      color: var(--text);
+      background: transparent;
+    }
+
+    .button-secondary:hover {
+      border-color: rgba(255,255,255,0.28);
+      background: rgba(255,255,255,0.03);
+    }
+
+    .hero {
+      padding: 90px 0 64px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 42px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      color: var(--accent);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-size: 0.82rem;
+      font-weight: 700;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.6rem, 6vw, 4.9rem);
+      line-height: 0.95;
+      letter-spacing: -0.04em;
+    }
+
+    .hero p.lead {
+      margin: 22px 0 0;
+      color: var(--muted);
+      font-size: 1.14rem;
+      max-width: 700px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 30px;
+    }
+
+    .hero-card {
+      background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.28);
+    }
+
+    .hero-card h3 {
+      margin: 0 0 10px;
+      font-size: 1.2rem;
+    }
+
+    .hero-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1rem;
+    }
+
+    .hero-card .stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .stat {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 16px;
+      background: rgba(255,255,255,0.02);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.55rem;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    section {
+      padding: 34px 0;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      line-height: 1.05;
+      margin: 0 0 12px;
+      letter-spacing: -0.03em;
+    }
+
+    .section-copy {
+      margin: 0 0 28px;
+      color: var(--muted);
+      max-width: 760px;
+    }
+
+    .three-up {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 24px;
+    }
+
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 1.15rem;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .quote {
+      margin-top: 8px;
+      background: linear-gradient(180deg, rgba(201,169,106,0.08), rgba(255,255,255,0.02));
+      border: 1px solid rgba(201,169,106,0.25);
+      border-radius: 24px;
+      padding: 28px;
+    }
+
+    .quote p {
+      margin: 0;
+      font-size: 1.28rem;
+      line-height: 1.5;
+    }
+
+    .quote small {
+      display: block;
+      margin-top: 14px;
+      color: var(--muted);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .signup {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .signup .card {
+      height: 100%;
+    }
+
+    form {
+      display: grid;
+      gap: 14px;
+      margin-top: 8px;
+    }
+
+    input {
+      width: 100%;
+      padding: 15px 16px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+      color: var(--text);
+      font-size: 1rem;
+    }
+
+    input::placeholder { color: #8d98a8; }
+
+    .fine-print {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin-top: 10px;
+    }
+
+    .footer {
+      padding: 28px 0 56px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .footer-line {
+      padding-top: 26px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 920px) {
+      .hero-grid,
+      .signup,
+      .three-up {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 60px;
+      }
+    }
   </style>
 </head>
 <body>
-  <h1>Trusted Intent</h1>
-  <p>Coming Soon</p>
+  <header class="topbar">
+    <div class="wrap nav">
+      <a class="brand" href="#top">
+        <span class="brand-mark">TI</span>
+        <span>Trusted Intent</span>
+      </a>
+      <nav class="nav-links">
+        <a href="#about">About</a>
+        <a href="#book">Book</a>
+        <a href="#speaking">Speaking</a>
+        <a href="#join">Join the List</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <span class="eyebrow">Leadership platform in development</span>
+          <h1>Becoming the leader people trust.</h1>
+          <p class="lead">
+            Trusted Intent is a leadership platform built around one central idea: people do not follow title alone. They follow leaders whose actions, judgment, and character persuade them that their intent can be trusted.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#join">Join the Email List</a>
+            <a class="button button-secondary" href="https://blakeglassleadership.com" target="_blank" rel="noopener noreferrer">Visit Blake Glass Leadership</a>
+          </div>
+        </div>
+
+        <aside class="hero-card">
+          <h3>What’s coming</h3>
+          <p>
+            A book, speaking platform, and leadership content focused on trust, presence, humility, accountability, and leading well under pressure.
+          </p>
+          <div class="stat-grid">
+            <div class="stat">
+              <strong>Book</strong>
+              <span>In progress</span>
+            </div>
+            <div class="stat">
+              <strong>Talks</strong>
+              <span>Coming soon</span>
+            </div>
+            <div class="stat">
+              <strong>Ideas</strong>
+              <span>Work & home</span>
+            </div>
+            <div class="stat">
+              <strong>Focus</strong>
+              <span>Trust in leadership</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="wrap">
+        <h2 class="section-title">Why Trusted Intent</h2>
+        <p class="section-copy">
+          In difficult moments, people can tell whether a leader is acting for themselves or for the good of the mission and the people they serve. Trusted Intent is about closing that gap. It is about becoming the kind of leader whose motives are believed, whose standards are respected, and whose presence brings steadiness when pressure rises.
+        </p>
+        <div class="three-up">
+          <div class="card">
+            <h3>At work</h3>
+            <p>
+              Practical leadership ideas for building trust, strengthening culture, making decisions under pressure, and creating teams that perform with clarity and confidence.
+            </p>
+          </div>
+          <div class="card">
+            <h3>At home</h3>
+            <p>
+              Because leadership is not confined to offices, formations, or boardrooms. The people closest to us know whether our character is real.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Under pressure</h3>
+            <p>
+              The moments that matter most are the moments that reveal us. Trusted Intent is about becoming trustworthy before the crisis comes.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="book">
+      <div class="wrap">
+        <div class="quote">
+          <p>
+            “People do not give their best to leaders they merely obey. They give their best to leaders they trust.”
+          </p>
+          <small>Trusted Intent</small>
+        </div>
+      </div>
+    </section>
+
+    <section id="speaking">
+      <div class="wrap">
+        <h2 class="section-title">Book. Speaking. Leadership content.</h2>
+        <p class="section-copy">
+          This platform is being built for leaders who want more than slogans. The upcoming work will focus on trusted leadership in real life: decision-making, command presence, humility, ownership, consistency, and the burden of responsibility.
+        </p>
+        <div class="three-up">
+          <div class="card">
+            <h3>The book</h3>
+            <p>
+              A practical leadership book centered on trusted intent and what it takes to become the kind of leader people willingly follow.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Speaking</h3>
+            <p>
+              Keynotes and talks for organizations, teams, and leaders who want substance, clarity, and practical lessons that hold up under pressure.
+            </p>
+          </div>
+          <div class="card">
+            <h3>Ongoing content</h3>
+            <p>
+              Articles, reflections, and ideas for people serious about leadership, trust, responsibility, and influence that is earned rather than assumed.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="join">
+      <div class="wrap signup">
+        <div class="card">
+          <h2 class="section-title">Join the list</h2>
+          <p class="section-copy" style="margin-bottom:16px; max-width:none;">
+            Get updates when the book, speaking information, and new leadership content are ready.
+          </p>
+          <form name="contact" netlify>
+            <input type="text" name="name" placeholder="Your name" />
+            <input type="email" name="email" placeholder="Your email address" required />
+            <button type="submit" class="button button-primary">Notify Me</button>
+          </form>
+          <p class="fine-print">
+            This form is a placeholder for now. To collect emails, you will need to connect it to a service later.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3 style="margin-top:0; font-size:1.4rem;">In the meantime</h3>
+          <p>
+            If you want to see more of Blake’s current leadership writing and background, visit the existing site below.
+          </p>
+          <div style="margin-top:24px; display:flex; flex-wrap:wrap; gap:12px;">
+            <a class="button button-secondary" href="https://blakeglassleadership.com" target="_blank" rel="noopener noreferrer">Go to Blake Glass Leadership</a>
+          </div>
+          <p class="fine-print" style="margin-top:24px;">
+            Trusted Intent is the emerging platform and long-term brand. This page will continue to evolve as the book and speaking work develop.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-line">
+      <div>© 2026 Trusted Intent. All rights reserved.</div>
+      <div>trustedintentleadership.com</div>
+    </div>
+  </footer>
 </body>
 </html>
