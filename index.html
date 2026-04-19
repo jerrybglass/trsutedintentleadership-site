@@ -3,148 +3,687 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Trusted Intent</title>
-
+  <title>Trusted Intent | Blake Glass</title>
+  <meta
+    name="description"
+    content="Trusted Intent — Why People Follow Leaders When It Matters Most. A leadership book and speaking platform by Blake Glass."
+  />
   <style>
+    :root {
+      --bg: #07111f;
+      --bg-soft: #0d1830;
+      --panel: rgba(255, 255, 255, 0.04);
+      --panel-strong: rgba(255, 255, 255, 0.06);
+      --text: #f4f6fb;
+      --muted: #c8cfdb;
+      --line: rgba(255, 255, 255, 0.12);
+      --gold: #d7b56d;
+      --gold-dark: #b8944d;
+      --max: 1140px;
+      --radius: 24px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background-color: #000;
-      color: #fff;
-    }
-
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 40px;
-      border-bottom: 1px solid #222;
-    }
-
-    .logo {
-      font-size: 22px;
-      font-weight: bold;
-      letter-spacing: 1px;
-    }
-
-    nav a {
-      margin-left: 25px;
-      text-decoration: none;
-      color: #ccc;
-      font-size: 16px;
-    }
-
-    nav a:hover {
-      color: #fff;
-    }
-
-    .hero {
-      text-align: center;
-      padding: 120px 20px 100px;
-      max-width: 900px;
-      margin: auto;
-    }
-
-    .hero h1 {
-      font-size: 64px;
-      margin-bottom: 20px;
-    }
-
-    .hero p {
-      font-size: 20px;
-      color: #ccc;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(215,181,109,0.10), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(215,181,109,0.06), transparent 22%),
+        linear-gradient(90deg, #0a1221 0%, #031021 50%, #00122f 100%);
       line-height: 1.6;
     }
 
-    .hero strong {
+    img {
+      max-width: 100%;
       display: block;
-      margin-top: 20px;
-      font-size: 22px;
-      color: #fff;
     }
 
-    .buttons {
-      margin-top: 40px;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 14px 24px;
-      margin: 10px;
-      border-radius: 6px;
+    a {
+      color: inherit;
       text-decoration: none;
-      font-weight: bold;
-      font-size: 16px;
     }
 
-    .btn-primary {
-      background: #fff;
-      color: #000;
+    .wrap {
+      width: min(100% - 32px, var(--max));
+      margin: 0 auto;
     }
 
-    .btn-secondary {
-      border: 1px solid #fff;
-      color: #fff;
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(6, 15, 29, 0.88);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
     }
 
-    .btn-secondary:hover {
-      background: #fff;
-      color: #000;
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 14px 0;
     }
 
-    footer {
-      text-align: center;
-      padding: 40px;
-      border-top: 1px solid #222;
-      color: #777;
-      font-size: 14px;
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      min-width: 0;
+    }
+
+    .brand img {
+      height: 54px;
+      width: auto;
+      border-radius: 8px;
+      background: rgba(255,255,255,0.02);
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .brand-title {
+      font-size: 0.98rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .brand-subtitle {
+      color: var(--muted);
+      font-size: 0.76rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .button,
+    button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 22px;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      font-weight: 700;
+      cursor: pointer;
+      transition: 0.2s ease;
+      font-size: 0.98rem;
+    }
+
+    .button-primary {
+      background: var(--gold);
+      color: #111;
+    }
+
+    .button-primary:hover {
+      background: var(--gold-dark);
+      transform: translateY(-1px);
+    }
+
+    .button-secondary {
+      background: transparent;
+      color: var(--text);
+      border-color: var(--line);
+    }
+
+    .button-secondary:hover {
+      background: rgba(255,255,255,0.03);
+      border-color: rgba(255,255,255,0.24);
+    }
+
+    .hero {
+      padding: 96px 0 78px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 42px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      margin-bottom: 18px;
+      color: var(--gold);
+      font-size: 0.82rem;
+      font-weight: 700;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(3rem, 6vw, 5.1rem);
+      line-height: 0.96;
+      letter-spacing: -0.045em;
+    }
+
+    .subtitle {
+      margin: 16px 0 8px;
+      font-size: 1.34rem;
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    .tagline {
+      margin: 0 0 24px;
+      color: var(--gold);
+      font-size: 0.98rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .lead {
+      margin: 0;
+      max-width: 760px;
+      color: var(--muted);
+      font-size: 1.1rem;
+    }
+
+    .hero-highlight {
+      margin-top: 18px;
+      color: #ffffff;
+      font-size: 1.08rem;
+      font-weight: 700;
+      max-width: 760px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 32px;
+    }
+
+    .hero-card,
+    .panel,
+    .quote {
+      background: linear-gradient(180deg, var(--panel-strong), var(--panel));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: 0 18px 50px rgba(0,0,0,0.22);
+    }
+
+    .hero-card {
+      padding: 30px;
+    }
+
+    .hero-logo {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .hero-logo img {
+      width: min(100%, 330px);
+      height: auto;
+      filter: drop-shadow(0 12px 20px rgba(0,0,0,0.22));
+    }
+
+    .hero-card h3,
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 1.14rem;
+    }
+
+    .hero-card p,
+    .card p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .stat {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 16px;
+      background: rgba(255,255,255,0.02);
+    }
+
+    .stat strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--gold);
+      font-size: 1.02rem;
+      line-height: 1.3;
+    }
+
+    section {
+      padding: 36px 0;
+    }
+
+    .section-title {
+      margin: 0 0 12px;
+      font-size: 2rem;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+    }
+
+    .section-copy {
+      margin: 0 0 28px;
+      max-width: 840px;
+      color: var(--muted);
+      font-size: 1.03rem;
+    }
+
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .three-up,
+    .topic-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .panel,
+    .card {
+      padding: 24px;
+      height: 100%;
+    }
+
+    .quote {
+      padding: 30px;
+      background: linear-gradient(180deg, rgba(215,181,109,0.10), rgba(255,255,255,0.03));
+      border: 1px solid rgba(215,181,109,0.22);
+    }
+
+    .quote p {
+      margin: 0;
+      font-size: 1.32rem;
+      line-height: 1.5;
+    }
+
+    .quote small {
+      display: block;
+      margin-top: 14px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .about-author,
+    .signup {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+
+    form {
+      display: grid;
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    input {
+      width: 100%;
+      padding: 15px 16px;
+      border-radius: 14px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,0.03);
+      color: var(--text);
+      font-size: 1rem;
+    }
+
+    input::placeholder {
+      color: #97a3b4;
+    }
+
+    .fine-print {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .footer {
+      padding: 26px 0 54px;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .footer-line {
+      border-top: 1px solid var(--line);
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 960px) {
+      .hero-grid,
+      .split,
+      .three-up,
+      .topic-grid,
+      .about-author,
+      .signup {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 66px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .brand img {
+        height: 46px;
+      }
+
+      .brand-title {
+        font-size: 0.9rem;
+      }
+
+      .subtitle {
+        font-size: 1.12rem;
+      }
+
+      .quote p {
+        font-size: 1.14rem;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
     }
   </style>
 </head>
-
 <body>
+  <header class="topbar">
+    <div class="wrap nav">
+      <a class="brand" href="index.html">
+        <img src="logo1.png" alt="Trusted Intent logo" />
+        <div class="brand-text">
+          <span class="brand-title">Trusted Intent</span>
+          <span class="brand-subtitle">Book and speaking platform</span>
+        </div>
+      </a>
 
-<header>
-  <div class="logo">Trusted Intent</div>
-  <nav>
-    <a href="index.html">The Idea</a>
-    <a href="book.html">The Book</a>
-    <a href="speaking.html">Speaking</a>
-    <a href="#">About Blake</a>
-    <a href="mailto:blake@trustedintentleadership.com">Join the Email List</a>
-  </nav>
-</header>
+      <nav class="nav-links">
+        <a href="#idea">The Idea</a>
+        <a href="book.html">The Book</a>
+        <a href="speaking.html">Speaking</a>
+        <a href="#about">About Blake</a>
+        <a href="#join">Join the List</a>
+      </nav>
+    </div>
+  </header>
 
-<section class="hero">
-  <h1>Trusted Intent</h1>
+  <main id="top">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <span class="eyebrow">Leadership book and keynote platform</span>
+          <h1>Trusted Intent</h1>
+          <p class="subtitle">Why People Follow Leaders When It Matters Most</p>
+          <p class="tagline">From Bullets to Spreadsheets to Homework</p>
+          <p class="lead">
+            People do not truly follow leaders because of rank, authority, intelligence, or position. They follow leaders whose intent they trust.
+          </p>
+          <p class="hero-highlight">
+            Because when the moment comes… people already know whether they believe in you.
+          </p>
 
-  <p>
-    People do not follow leaders because of rank, authority, or title.
-    They follow leaders whose intent they trust.
-  </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#join">Join the Email List</a>
+            <a class="button button-secondary" href="speaking.html">Explore Speaking Topics</a>
+            <a class="button button-secondary" href="book.html">Explore the Book</a>
+          </div>
+        </div>
 
-  <strong>
-    Because when the moment comes… people already know whether they believe in you.
-  </strong>
+        <aside class="hero-card">
+          <div class="hero-logo">
+            <img src="logo1.png" alt="Trusted Intent shield logo" />
+          </div>
+          <h3>What’s coming</h3>
+          <p>
+            A story-driven leadership book and speaking platform built around a simple truth: people follow leaders they trust when it matters most.
+          </p>
 
-  <div class="buttons">
-    <a class="btn btn-primary" href="mailto:blake@trustedintentleadership.com">
-      Join the Email List
-    </a>
+          <div class="stat-grid">
+            <div class="stat">
+              <strong>Book</strong>
+              <span>Story-driven leadership</span>
+            </div>
+            <div class="stat">
+              <strong>Speaking</strong>
+              <span>Keynotes and leadership talks</span>
+            </div>
+            <div class="stat">
+              <strong>Audience</strong>
+              <span>Work, home, and teams</span>
+            </div>
+            <div class="stat">
+              <strong>Core idea</strong>
+              <span>Trust transforms compliance into commitment</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
 
-    <a class="btn btn-secondary" href="speaking.html">
-      Explore Speaking Topics
-    </a>
+    <section id="idea">
+      <div class="wrap split">
+        <div class="panel">
+          <h2 class="section-title">This is not a book about military leadership</h2>
+          <p class="section-copy" style="max-width:none; margin-bottom:0;">
+            It is a book about leadership itself. The stories come from combat, boardrooms, and family life, but the lessons apply wherever people are entrusted with responsibility for others.
+          </p>
+        </div>
 
-    <a class="btn btn-secondary" href="book.html">
-      Explore the Book
-    </a>
-  </div>
-</section>
+        <div class="panel">
+          <h2 class="section-title">What is trusted intent?</h2>
+          <p class="section-copy" style="max-width:none; margin-bottom:0;">
+            Trusted intent is when people believe a leader’s actions reflect responsibility for the mission and genuine care for the people—never personal gain. When that belief exists, people do more than comply. They commit.
+          </p>
+        </div>
+      </div>
+    </section>
 
-<footer>
-  © 2026 Trusted Intent Leadership
-</footer>
+    <section>
+      <div class="wrap">
+        <div class="quote">
+          <p>
+            “People follow leaders they trust when it matters most.”
+          </p>
+          <small>Trusted Intent</small>
+        </div>
+      </div>
+    </section>
 
+    <section id="book">
+      <div class="wrap">
+        <h2 class="section-title">The Book</h2>
+        <p class="section-copy">
+          Trusted Intent is a story-driven leadership book about why people follow some leaders and merely comply with others. It is not a formula, a checklist, or a theory of heroic leadership. It is a practical exploration of trustworthy leadership through real stories of responsibility, example, sacrifice, accountability, humility, competence, wisdom, failure, and growth.
+        </p>
+        <p class="section-copy">
+          The lessons are drawn from military command, crisis response, corporate leadership, and family life, but the message is broader than any one field. Leadership is not confined to a battlefield or a boardroom. It exists anywhere people place their trust in someone else.
+        </p>
+
+        <div class="three-up">
+          <div class="panel card">
+            <h3>Built on real stories</h3>
+            <p>
+              The manuscript draws from combat, command, mentorship, mistakes, parenting, and corporate leadership to show what trustworthy leadership actually looks like.
+            </p>
+          </div>
+          <div class="panel card">
+            <h3>Centered on responsibility</h3>
+            <p>
+              Leadership is not about privilege. It is about carrying responsibility for the mission, the people, and the consequences of your decisions.
+            </p>
+          </div>
+          <div class="panel card">
+            <h3>Written for work and home</h3>
+            <p>
+              The lessons apply to executives, managers, coaches, teachers, parents, and anyone entrusted with leading other people.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="speaking">
+      <div class="wrap">
+        <h2 class="section-title">Speaking Topics</h2>
+        <p class="section-copy">
+          Blake Glass speaks on leadership, trust, pressure, accountability, and the responsibilities leaders carry at work and at home.
+        </p>
+
+        <div class="topic-grid">
+          <div class="panel card">
+            <h3>Trusted Intent</h3>
+            <p>
+              Why people follow some leaders and not others. This keynote explores how leaders build trust long before it is tested, and why intent—not authority—is what ultimately determines whether people will follow.
+            </p>
+          </div>
+
+          <div class="panel card">
+            <h3>Leadership Under Pressure</h3>
+            <p>
+              Drawing from combat leadership and national-level crisis decision environments, this keynote explores how leaders create clarity, maintain composure, and make sound decisions when consequences are real.
+            </p>
+          </div>
+
+          <div class="panel card">
+            <h3>The Burden of Leadership</h3>
+            <p>
+              Leadership is a responsibility, not a privilege. This talk explores the unseen weight leaders carry and how humility, trust, and strong culture allow them to lead through both success and failure.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="quote">
+          <p>
+            “Trust is not built in the moment of crisis. It is built long before the moment ever arrives.”
+          </p>
+          <small>From the prologue</small>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="wrap">
+        <h2 class="section-title">About Blake Glass</h2>
+
+        <div class="about-author">
+          <div class="panel">
+            <p class="section-copy" style="margin-bottom:0; max-width:none;">
+              Brigadier General Blake Glass has spent more than three decades leading organizations in some of the most demanding environments imaginable—from combat operations in Iraq to advising senior leaders during moments of real national security crisis.
+            </p>
+          </div>
+
+          <div class="panel">
+            <p class="section-copy" style="margin-bottom:0; max-width:none;">
+              His leadership experience spans combat command, strategic military leadership, corporate development, and family life. Across those environments, he has observed a consistent truth: people follow leaders they trust when it matters most.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap split">
+        <div class="panel">
+          <h2 class="section-title">Why this message matters</h2>
+          <p class="section-copy" style="max-width:none; margin-bottom:0;">
+            Organizations succeed when people trust their leaders. When leaders demonstrate trusted intent, teams become stronger, cultures improve, and organizations perform at a higher level—even during moments of adversity.
+          </p>
+        </div>
+
+        <div class="panel">
+          <h2 class="section-title">Leadership is not about being followed</h2>
+          <p class="section-copy" style="max-width:none; margin-bottom:0;">
+            It is about being trusted. And that trust is built in the moments no one is watching, long before it is ever required. When the moment comes, people already know whether they believe in you.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="join">
+      <div class="wrap signup">
+        <div class="panel">
+          <h2 class="section-title">Join the List</h2>
+          <p class="section-copy" style="margin-bottom:16px; max-width:none;">
+            Get updates when the book, speaking availability, and new leadership content are released.
+          </p>
+
+          <form>
+            <input type="text" name="name" placeholder="Your name" />
+            <input type="email" name="email" placeholder="Your email address" />
+            <button type="button" class="button button-primary">Coming Soon</button>
+          </form>
+
+          <p class="fine-print">
+            Email signup can be connected later when your list provider is ready.
+          </p>
+        </div>
+
+        <div class="panel">
+          <h3 style="margin-top:0; font-size:1.4rem;">In the meantime</h3>
+          <p class="section-copy" style="max-width:none; margin-bottom:18px;">
+            Explore the book page, review speaking topics, and follow the early development of Trusted Intent as the platform continues to grow.
+          </p>
+          <div style="display:flex; gap:12px; flex-wrap:wrap;">
+            <a class="button button-secondary" href="book.html">Go to the Book Page</a>
+            <a class="button button-secondary" href="speaking.html">Go to Speaking</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap footer-line">
+      <div>© 2026 Trusted Intent</div>
+      <div>Contact: blake@trustedintentleadership.com</div>
+    </div>
+  </footer>
 </body>
 </html>
