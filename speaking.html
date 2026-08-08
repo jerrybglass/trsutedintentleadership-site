@@ -561,8 +561,13 @@
       padding-top: 24px;
       display: flex;
       justify-content: space-between;
+      align-items: center;
       gap: 16px;
       flex-wrap: wrap;
+    }
+
+    .footer-brand-note {
+      text-align: right;
     }
 
     @media (max-width: 960px) {
@@ -621,6 +626,14 @@
     }
 
     @media (max-width: 640px) {
+      .footer-line {
+        align-items: flex-start;
+      }
+
+      .footer-brand-note {
+        text-align: left;
+      }
+
       .brand img {
         height: 46px;
       }
@@ -971,8 +984,8 @@
 
   <footer class="footer">
     <div class="wrap footer-line">
-      <div>© 2026 Trusted Intent</div>
-      <div>Contact: blake@trustedintentleadership.com</div>
+      <div>© 2026 Glass Leadership Group LLC.</div>
+      <div class="footer-brand-note">Trusted Intent is a brand of Glass Leadership Group LLC. · blake@trustedintentleadership.com</div>
     </div>
   </footer>
 </body>
