@@ -335,6 +335,68 @@
       gap: 24px;
     }
 
+    .book-feature {
+      display: grid;
+      grid-template-columns: minmax(300px, 0.82fr) minmax(0, 1.18fr);
+      gap: 48px;
+      align-items: center;
+      margin-bottom: 32px;
+    }
+
+    .book-visual {
+      position: relative;
+      overflow: hidden;
+      min-height: 520px;
+      border: 1px solid rgba(215,181,109,0.22);
+      border-radius: var(--radius);
+      background:
+        radial-gradient(circle at 50% 36%, rgba(215,181,109,0.12), transparent 34%),
+        #06111f;
+      box-shadow: 0 18px 50px rgba(0,0,0,0.22);
+    }
+
+    .book-visual img {
+      width: 100%;
+      height: 100%;
+      min-height: 520px;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .book-release {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      margin-bottom: 16px;
+      color: var(--gold);
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .book-release::before {
+      content: "";
+      width: 28px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .book-copy .section-title {
+      font-size: clamp(2.4rem, 5vw, 4.25rem);
+    }
+
+    .book-copy .section-copy {
+      max-width: 620px;
+    }
+
+    .book-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 8px;
+    }
+
     .about-photo {
       overflow: hidden;
       padding: 0;
@@ -567,8 +629,24 @@
       .topic-grid,
       .testimonial-grid,
       .about-author,
-      .signup {
+      .signup,
+      .book-feature {
         grid-template-columns: 1fr;
+      }
+
+      .book-feature {
+        gap: 30px;
+      }
+
+      .book-visual {
+        width: min(100%, 540px);
+        min-height: 0;
+        margin: 0 auto;
+      }
+
+      .book-visual img {
+        min-height: 0;
+        aspect-ratio: 4 / 5;
       }
 
       .topbar {
@@ -737,13 +815,32 @@
 
     <section id="book">
       <div class="wrap">
-        <h2 class="section-title">The Book</h2>
-        <p class="section-copy">
-          Trusted Intent is a story-driven leadership book about why people follow some leaders and merely comply with others. It is not a formula, a checklist, or a theory of heroic leadership. It is a practical exploration of trustworthy leadership through real stories of responsibility, example, sacrifice, accountability, humility, competence, wisdom, failure, and growth.
-        </p>
-        <p class="section-copy">
-          The lessons are drawn from military command, crisis response, corporate leadership, and family life, but the message is broader than any one field. Leadership is not confined to a battlefield or a boardroom. It exists anywhere people place their trust in someone else.
-        </p>
+        <div class="book-feature">
+          <div class="book-visual">
+            <img
+              src="trusted-intent-book-3d.webp"
+              alt="Three-dimensional hardcover mockup of Trusted Intent by Blake Glass"
+              width="1122"
+              height="1402"
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
+
+          <div class="book-copy">
+            <span class="book-release">Coming Fall 2026</span>
+            <h2 class="section-title">The Book</h2>
+            <p class="section-copy">
+              <em>Trusted Intent</em> is a story-driven leadership book about why people follow some leaders and merely comply with others. It is not a formula, a checklist, or a theory of heroic leadership. It is a practical exploration of trustworthy leadership through real stories of responsibility, example, sacrifice, accountability, humility, competence, wisdom, failure, and growth.
+            </p>
+            <p class="section-copy">
+              The lessons are drawn from military command, crisis response, corporate leadership, and family life, but the message is broader than any one field. Leadership exists anywhere people place their trust in someone else.
+            </p>
+            <div class="book-actions">
+              <a class="button button-primary" href="book.html">Explore the Book</a>
+            </div>
+          </div>
+        </div>
 
         <div class="three-up">
           <div class="panel card">
@@ -804,26 +901,26 @@
 
     <section id="homepage-testimonials">
       <div class="wrap">
-        <span class="eyebrow">Early audience feedback</span>
-        <h2 class="section-title">The Message Is Already Resonating</h2>
+        <span class="eyebrow">Speaking impact</span>
+        <h2 class="section-title">What Leaders and Audiences Are Saying</h2>
         <p class="section-copy">
-          Trusted Intent is connecting with people who understand that trust is built before it is tested—in leadership, service, business, and life.
+          Blake’s message is connecting with military, corporate, and professional audiences because it addresses a universal leadership challenge: earning trust before pressure tests it.
         </p>
 
         <div class="testimonial-grid">
           <article class="testimonial-card">
-            <blockquote>“The presentation was mind-blowing! Thank you for the different levels of our involvement and the leadership lessons!”</blockquote>
-            <cite>— Pulte Military Veterans Program Participant</cite>
+            <blockquote>“His message reinforced the importance of trusted leadership, professional development, and preparing our Soldiers and leaders to operate effectively in an increasingly complex joint environment.”</blockquote>
+            <cite>— Roye Locklear, President, AUSA First Militia Chapter</cite>
           </article>
 
           <article class="testimonial-card">
-            <blockquote>“You are by far one of the greatest leaders I have ever had the pleasure of working for.”</blockquote>
-            <cite>— Former Team Member</cite>
+            <blockquote>“The presentation was mind-blowing! Thank you for the different levels of our involvement and the leadership lessons!”</blockquote>
+            <cite>— Pulte Military Veterans Program Participant</cite>
           </article>
         </div>
 
         <div class="testimonial-actions">
-          <a class="button button-secondary" href="speaking.html#testimonials">See Speaking Topics &amp; Feedback</a>
+          <a class="button button-secondary" href="speaking.html#testimonials">View Speaking Topics &amp; Engagements</a>
         </div>
       </div>
     </section>
