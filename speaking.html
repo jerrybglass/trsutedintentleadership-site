@@ -461,6 +461,39 @@
       color: var(--muted);
     }
 
+    .engagement-featured {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+      padding: 0;
+      overflow: hidden;
+    }
+
+    .engagement-photo {
+      display: block;
+      width: 100%;
+      height: 100%;
+      min-height: 320px;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .engagement-details {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 34px;
+    }
+
+    .engagement-date {
+      margin-bottom: 10px;
+      color: var(--gold);
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
     .audience-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -540,6 +573,16 @@
       .engagement-grid,
       .signup {
         grid-template-columns: 1fr;
+      }
+
+      .engagement-featured {
+        grid-column: auto;
+        grid-template-columns: 1fr;
+      }
+
+      .engagement-photo {
+        min-height: 0;
+        aspect-ratio: 16 / 9;
       }
 
       .audience-grid {
@@ -813,8 +856,8 @@
 
           <article class="testimonial-card">
             <div class="testimonial-star">⭐</div>
-            <blockquote>“This is why you are one of the best leaders I was blessed to have.”</blockquote>
-            <cite>— Former Soldier and Team Member</cite>
+            <blockquote>“His message reinforced the importance of trusted leadership, professional development, and preparing our Soldiers and leaders to operate effectively in an increasingly complex joint environment.”</blockquote>
+            <cite>— Roye Locklear, President, AUSA First Militia Chapter</cite>
           </article>
         </div>
 
@@ -825,6 +868,15 @@
           </p>
 
           <div class="engagement-grid">
+            <article class="engagement-card engagement-featured">
+              <img class="engagement-photo" src="ausa-first-militia-august-2026.jpg" alt="Blake Glass speaking to the AUSA First Militia Chapter on August 6, 2026" />
+              <div class="engagement-details">
+                <span class="engagement-date">August 6, 2026 · General Membership Meeting</span>
+                <h3>AUSA First Militia Chapter</h3>
+                <p>Guest address on Joint Operations, Combatant Commands, trusted leadership, and preparing Soldiers and leaders for an increasingly complex joint environment.</p>
+              </div>
+            </article>
+
             <article class="engagement-card">
               <h3>Pulte Military Veterans Program</h3>
               <p>Leadership talk on service, trust, pressure, and the responsibility leaders carry in military and business environments.</p>
