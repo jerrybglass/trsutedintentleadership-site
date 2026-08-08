@@ -561,8 +561,13 @@
       padding-top: 24px;
       display: flex;
       justify-content: space-between;
+      align-items: center;
       gap: 16px;
       flex-wrap: wrap;
+    }
+
+    .footer-brand-note {
+      text-align: right;
     }
 
     .certification-section {
@@ -571,12 +576,18 @@
 
     .certification-band {
       display: grid;
-      grid-template-columns: minmax(260px, 0.8fr) minmax(500px, 1.2fr);
+      grid-template-columns: 132px minmax(260px, 1fr) auto;
       align-items: center;
-      gap: 32px;
+      gap: 26px;
       padding: 22px 0;
       border-top: 1px solid var(--line);
       border-bottom: 1px solid var(--line);
+    }
+
+    .glg-logo {
+      display: block;
+      width: 132px;
+      height: auto;
     }
 
     .certification-copy p {
@@ -596,18 +607,18 @@
     .certification-badge {
       display: grid;
       place-items: center;
-      width: 112px;
-      height: 112px;
-      flex: 0 0 112px;
+      width: 90px;
+      height: 90px;
+      flex: 0 0 90px;
       background: #ffffff;
       border-radius: 10px;
-      padding: 9px;
+      padding: 8px;
     }
 
     .certification-badge img {
       display: block;
       max-width: 100%;
-      max-height: 94px;
+      max-height: 74px;
       width: auto;
       height: auto;
     }
@@ -674,13 +685,17 @@
       }
 
       .certification-band {
-        grid-template-columns: 1fr;
+        grid-template-columns: 124px 1fr;
         gap: 18px;
-        text-align: center;
       }
 
       .certification-badges {
+        grid-column: 1 / -1;
         justify-content: center;
+      }
+
+      .glg-logo {
+        width: 124px;
       }
     }
 
@@ -702,22 +717,38 @@
       }
 
       .certification-band {
+        grid-template-columns: 1fr;
         padding: 20px 0;
+        text-align: center;
+      }
+
+      .glg-logo {
+        width: 112px;
+        margin: 0 auto;
       }
 
       .certification-badges {
+        grid-column: auto;
         gap: 9px;
       }
 
       .certification-badge {
-        width: 94px;
-        height: 94px;
-        flex-basis: 94px;
+        width: 84px;
+        height: 84px;
+        flex-basis: 84px;
         padding: 7px;
       }
 
       .certification-badge img {
-        max-height: 80px;
+        max-height: 70px;
+      }
+
+      .footer-line {
+        align-items: flex-start;
+      }
+
+      .footer-brand-note {
+        text-align: left;
       }
 
       .quote p {
@@ -1064,11 +1095,12 @@
   <section class="certification-section" aria-label="Business certifications">
     <div class="wrap">
       <div class="certification-band">
+        <img class="glg-logo" src="glass-leadership-group-logo.png" alt="Glass Leadership Group" />
         <div class="certification-copy">
-          <span class="eyebrow">Certified Veteran-Owned Business</span>
+          <span class="eyebrow">Glass Leadership Group LLC</span>
           <p>
-            Glass Leadership Group LLC is SBA-certified SDVOSB and VOSB, Florida-certified VCBE,
-            SAM.gov registered, and a CAGE code holder.
+            The company behind Trusted Intent—leadership speaking, executive advising, and organizational development.
+            SBA-certified SDVOSB and VOSB, Florida-certified VCBE, SAM.gov registered, and a CAGE code holder.
           </p>
         </div>
         <div class="certification-badges">
@@ -1088,8 +1120,8 @@
 
   <footer class="footer">
     <div class="wrap footer-line">
-      <div>© 2026 Trusted Intent</div>
-      <div>Contact: blake@trustedintentleadership.com</div>
+      <div>© 2026 Glass Leadership Group LLC.</div>
+      <div class="footer-brand-note">Trusted Intent is a brand of Glass Leadership Group LLC. · blake@trustedintentleadership.com</div>
     </div>
   </footer>
 </body>
