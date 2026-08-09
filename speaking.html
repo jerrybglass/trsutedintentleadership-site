@@ -30,6 +30,7 @@
 
   gtag('config', 'G-58Q2WPMLMN');
 </script>
+<script defer src="analytics.js"></script>
   
   <style>
     :root {
@@ -866,7 +867,7 @@
         <a href="book.html">Book</a>
         <a href="speaking.html" aria-current="page">Speaking</a>
         <a href="index.html#about">About</a>
-        <a class="nav-cta" href="#request">Request Info</a>
+        <a class="nav-cta" href="#request" data-analytics-event="speaking_cta_click" data-analytics-location="speaking_nav">Request Info</a>
       </nav>
     </div>
   </header>
@@ -888,8 +889,8 @@
           </p>
 
           <div class="hero-actions">
-            <a class="button button-primary" href="#request">Request Speaking Information</a>
-            <a class="button button-secondary" href="Blake-Glass-Trusted-Intent-Speaker-Sheet.pdf" download>Download Speaker Sheet</a>
+            <a class="button button-primary" href="#request" data-analytics-event="speaking_cta_click" data-analytics-location="speaking_hero">Request Speaking Information</a>
+            <a class="button button-secondary" href="Blake-Glass-Trusted-Intent-Speaker-Sheet.pdf" download data-analytics-event="speaker_sheet_download" data-analytics-location="speaking_page">Download Speaker Sheet</a>
           </div>
         </div>
 
@@ -1240,7 +1241,7 @@
             <div class="inquiry-links">
               <span class="fine-print fine-print-flush">Prefer email?</span>
               <a class="email-link" href="mailto:blake@trustedintentleadership.com">blake@trustedintentleadership.com</a>
-              <a class="button button-secondary" href="Blake-Glass-Trusted-Intent-Speaker-Sheet.pdf" download>Download Speaker Sheet</a>
+              <a class="button button-secondary" href="Blake-Glass-Trusted-Intent-Speaker-Sheet.pdf" download data-analytics-event="speaker_sheet_download" data-analytics-location="speaking_page">Download Speaker Sheet</a>
             </div>
           </aside>
         </div>
@@ -1279,6 +1280,13 @@
         });
 
         if (!response.ok) throw new Error('Submission failed');
+
+        window.TrustedIntentAnalytics?.track('generate_lead', {
+          form_name: 'speaking_inquiry',
+          lead_source: 'website',
+          topic_of_interest: document.getElementById('inquiry-topic')?.value || 'not_specified',
+          audience_size: document.getElementById('inquiry-audience')?.value || 'not_specified'
+        });
 
         inquiryForm.reset();
         inquiryStatus.classList.add('success');
