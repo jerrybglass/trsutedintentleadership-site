@@ -516,22 +516,70 @@
       gap: 24px;
     }
 
-    form {
+    .inquiry-intro {
+      max-width: 760px;
+      margin-bottom: 28px;
+    }
+
+    .inquiry-intro .section-copy {
+      max-width: none;
+      margin-bottom: 0;
+    }
+
+    .inquiry-layout {
       display: grid;
-      gap: 14px;
-      margin-top: 14px;
+      grid-template-columns: minmax(0, 1.55fr) minmax(280px, 0.65fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .inquiry-panel {
+      border-color: rgba(215,181,109,0.28);
+      background: linear-gradient(180deg, rgba(215,181,109,0.075), rgba(255,255,255,0.035));
+    }
+
+    .inquiry-form {
+      display: grid;
+      gap: 18px;
+      margin-top: 0;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .form-field {
+      display: grid;
+      gap: 8px;
+    }
+
+    .form-field label {
+      color: #ffffff;
+      font-size: 0.88rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .optional {
+      color: var(--muted);
+      font-size: 0.8rem;
+      font-weight: 400;
     }
 
     input,
-    textarea {
+    textarea,
+    select {
       width: 100%;
       padding: 15px 16px;
       border-radius: 14px;
       border: 1px solid var(--line);
-      background: rgba(255,255,255,0.03);
+      background: #0b1727;
       color: var(--text);
       font-size: 1rem;
       font-family: Arial, Helvetica, sans-serif;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
     }
 
     input::placeholder,
@@ -539,15 +587,124 @@
       color: #97a3b4;
     }
 
+    input:focus,
+    textarea:focus,
+    select:focus {
+      outline: none;
+      border-color: var(--gold);
+      box-shadow: 0 0 0 3px rgba(215,181,109,0.14);
+    }
+
     textarea {
-      min-height: 120px;
+      min-height: 150px;
       resize: vertical;
+    }
+
+    .inquiry-submit {
+      width: 100%;
+      min-height: 52px;
+      border: 0;
+    }
+
+    .form-status {
+      min-height: 1.5em;
+      margin: -4px 0 0;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .form-status.success {
+      color: var(--gold);
+    }
+
+    .form-status.error {
+      color: #ffb4b4;
+    }
+
+    .inquiry-submit:disabled {
+      cursor: wait;
+      opacity: 0.72;
+      transform: none;
+    }
+
+    .inquiry-aside {
+      position: sticky;
+      top: 122px;
+    }
+
+    .inquiry-aside h3 {
+      color: #ffffff;
+      font-size: 1.35rem;
+    }
+
+    .inquiry-aside > p {
+      margin-top: 0;
+    }
+
+    .next-steps {
+      display: grid;
+      gap: 16px;
+      margin: 24px 0;
+    }
+
+    .next-step {
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 12px;
+      align-items: start;
+    }
+
+    .next-step-number {
+      display: grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      border: 1px solid rgba(215,181,109,0.42);
+      border-radius: 50%;
+      color: var(--gold);
+      font-size: 0.82rem;
+      font-weight: 800;
+    }
+
+    .next-step strong {
+      display: block;
+      margin-bottom: 2px;
+      color: #ffffff;
+      font-size: 0.94rem;
+    }
+
+    .next-step span {
+      color: var(--muted);
+      font-size: 0.9rem;
+      line-height: 1.45;
+    }
+
+    .inquiry-links {
+      display: grid;
+      gap: 10px;
+      padding-top: 22px;
+      border-top: 1px solid var(--line);
+    }
+
+    .email-link {
+      color: var(--gold);
+      font-weight: 700;
+      overflow-wrap: anywhere;
+    }
+
+    .honeypot {
+      position: absolute;
+      left: -5000px;
     }
 
     .fine-print {
       margin-top: 12px;
       color: var(--muted);
       font-size: 0.92rem;
+    }
+
+    .fine-print-flush {
+      margin: 0;
     }
 
     .footer {
@@ -576,8 +733,13 @@
       .three-up,
       .testimonial-grid,
       .engagement-grid,
-      .signup {
+      .signup,
+      .inquiry-layout {
         grid-template-columns: 1fr;
+      }
+
+      .inquiry-aside {
+        position: static;
       }
 
       .engagement-featured {
@@ -655,6 +817,15 @@
         align-items: stretch;
       }
 
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
+      .inquiry-panel,
+      .inquiry-aside {
+        padding: 24px;
+      }
+
       .keynote-card,
       .testimonial-card {
         padding: 28px;
@@ -706,7 +877,7 @@
           </p>
 
           <div class="hero-actions">
-            <a class="button button-primary" href="mailto:blake@trustedintentleadership.com">Request Speaking Information</a>
+            <a class="button button-primary" href="#request">Request Speaking Information</a>
             <a class="button button-secondary" href="Blake-Glass-Trusted-Intent-Speaker-Sheet.pdf" download>Download Speaker Sheet</a>
             <a class="button button-secondary" href="#topics">Explore Keynotes</a>
             <a class="button button-secondary" href="book.html">Explore the Book</a>
@@ -955,28 +1126,142 @@
     </section>
 
     <section id="request">
-      <div class="wrap signup">
-        <div class="panel">
+      <div class="wrap">
+        <div class="inquiry-intro">
+          <span class="eyebrow">Bring the message to your audience</span>
           <h2 class="section-title">Request speaking information</h2>
-          <p class="section-copy" style="margin-bottom:16px; max-width:none;">
-            Planning a leadership event, executive session, or team gathering? Contact Blake to discuss audience fit, topic selection, and availability.
-          </p>
-
-          <div style="display:flex; gap:12px; flex-wrap:wrap;">
-            <a class="button button-primary" href="mailto:blake@trustedintentleadership.com">Email Blake</a>
-            <a class="button button-secondary" href="book.html">View the Book</a>
-          </div>
-
-          <p class="fine-print">
-            Contact: blake@trustedintentleadership.com
+          <p class="section-copy">
+            Tell Blake a little about your event, audience, and goals. He will follow up directly to discuss fit, availability, and the right message for your organization.
           </p>
         </div>
 
-        <div class="panel">
-          <h3 style="margin-top:0; font-size:1.4rem;">Speaking platform</h3>
-          <p class="section-copy" style="max-width:none; margin-bottom:0;">
-            Trusted Intent is the foundation of the platform. Leadership Under Pressure expands the message into crisis and decision-making. The Will to Win brings the message into culture, morale, standards, and the responsibility leaders carry to inspire others.
-          </p>
+        <div class="inquiry-layout">
+          <div class="panel inquiry-panel">
+            <form
+              class="inquiry-form"
+              id="speaking-inquiry-form"
+              action="https://formspree.io/f/xrpzedlo"
+              method="post"
+            >
+              <input type="hidden" name="_subject" value="New Trusted Intent speaking inquiry" />
+
+              <div class="form-row">
+                <div class="form-field">
+                  <label for="inquiry-name">Name</label>
+                  <input id="inquiry-name" name="name" type="text" autocomplete="name" placeholder="Your name" required />
+                </div>
+
+                <div class="form-field">
+                  <label for="inquiry-organization">Organization</label>
+                  <input id="inquiry-organization" name="organization" type="text" autocomplete="organization" placeholder="Organization or company" required />
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-field">
+                  <label for="inquiry-email">Email</label>
+                  <input id="inquiry-email" name="email" type="email" autocomplete="email" placeholder="you@organization.com" required />
+                </div>
+
+                <div class="form-field">
+                  <label for="inquiry-phone">Phone <span class="optional">(optional)</span></label>
+                  <input id="inquiry-phone" name="phone" type="tel" autocomplete="tel" placeholder="Best number to reach you" />
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-field">
+                  <label for="inquiry-date">Event date or timing <span class="optional">(optional)</span></label>
+                  <input id="inquiry-date" name="event_date" type="text" placeholder="Date, month, or timing window" />
+                </div>
+
+                <div class="form-field">
+                  <label for="inquiry-location">Event location</label>
+                  <input id="inquiry-location" name="event_location" type="text" autocomplete="address-level2" placeholder="City, state, or virtual" required />
+                </div>
+              </div>
+
+              <div class="form-row">
+                <div class="form-field">
+                  <label for="inquiry-audience">Estimated audience size</label>
+                  <select id="inquiry-audience" name="audience_size" required>
+                    <option value="" selected disabled>Select a range</option>
+                    <option>Under 50</option>
+                    <option>50–100</option>
+                    <option>101–250</option>
+                    <option>251–500</option>
+                    <option>More than 500</option>
+                    <option>Not sure yet</option>
+                  </select>
+                </div>
+
+                <div class="form-field">
+                  <label for="inquiry-topic">Topic of interest</label>
+                  <select id="inquiry-topic" name="topic_of_interest" required>
+                    <option value="" selected disabled>Select a topic</option>
+                    <option>Trusted Intent</option>
+                    <option>Leadership Under Pressure</option>
+                    <option>The Will to Win</option>
+                    <option>Executive or team session</option>
+                    <option>Not sure—help me choose</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="form-field">
+                <label for="inquiry-description">Tell us about your event</label>
+                <textarea id="inquiry-description" name="event_description" placeholder="What is the event, who will be in the room, and what do you want them to leave thinking or doing differently?" required></textarea>
+              </div>
+
+              <div class="honeypot" aria-hidden="true">
+                <label for="inquiry-website">Leave this field empty</label>
+                <input id="inquiry-website" name="_gotcha" type="text" tabindex="-1" autocomplete="off" />
+              </div>
+
+              <button class="button button-primary inquiry-submit" type="submit">Send Speaking Inquiry</button>
+              <p class="form-status" id="inquiry-form-status" role="status" aria-live="polite"></p>
+              <p class="fine-print fine-print-flush">No obligation. Your information will only be used to respond to this inquiry.</p>
+            </form>
+          </div>
+
+          <aside class="panel inquiry-aside" aria-labelledby="inquiry-aside-title">
+            <h3 id="inquiry-aside-title">Start the conversation</h3>
+            <p>
+              Every engagement begins with the audience, the moment, and the outcome you need. Blake personally reviews each inquiry.
+            </p>
+
+            <div class="next-steps" role="list" aria-label="What happens next">
+              <div class="next-step" role="listitem">
+                <span class="next-step-number">1</span>
+                <div>
+                  <strong>Share the essentials</strong>
+                  <span>Event details, audience, and the leadership challenge you want to address.</span>
+                </div>
+              </div>
+
+              <div class="next-step" role="listitem">
+                <span class="next-step-number">2</span>
+                <div>
+                  <strong>Discuss the fit</strong>
+                  <span>Blake will follow up to talk through the right keynote or tailored session.</span>
+                </div>
+              </div>
+
+              <div class="next-step" role="listitem">
+                <span class="next-step-number">3</span>
+                <div>
+                  <strong>Shape the experience</strong>
+                  <span>Together, you will align the message to your audience and desired outcome.</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="inquiry-links">
+              <span class="fine-print fine-print-flush">Prefer email?</span>
+              <a class="email-link" href="mailto:blake@trustedintentleadership.com">blake@trustedintentleadership.com</a>
+              <a class="button button-secondary" href="Blake-Glass-Trusted-Intent-Speaker-Sheet.pdf" download>Download Speaker Sheet</a>
+            </div>
+          </aside>
         </div>
       </div>
     </section>
@@ -988,5 +1273,39 @@
       <div class="footer-brand-note">Trusted Intent is a brand of Glass Leadership Group LLC. · blake@trustedintentleadership.com</div>
     </div>
   </footer>
+  <script>
+    const inquiryForm = document.getElementById('speaking-inquiry-form');
+    const inquiryStatus = document.getElementById('inquiry-form-status');
+
+    inquiryForm?.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      inquiryStatus.className = 'form-status';
+
+      const submitButton = inquiryForm.querySelector('button[type="submit"]');
+      const originalButtonText = submitButton.textContent;
+      submitButton.disabled = true;
+      submitButton.textContent = 'Sending…';
+
+      try {
+        const response = await fetch(inquiryForm.action, {
+          method: 'POST',
+          body: new FormData(inquiryForm),
+          headers: { Accept: 'application/json' }
+        });
+
+        if (!response.ok) throw new Error('Submission failed');
+
+        inquiryForm.reset();
+        inquiryStatus.classList.add('success');
+        inquiryStatus.textContent = 'Thank you. Blake will review your inquiry and follow up directly.';
+      } catch (error) {
+        inquiryStatus.classList.add('error');
+        inquiryStatus.textContent = 'We could not send your inquiry. Please email blake@trustedintentleadership.com.';
+      } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = originalButtonText;
+      }
+    });
+  </script>
 </body>
 </html>
