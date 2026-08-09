@@ -408,6 +408,38 @@
       letter-spacing: 0.08em;
     }
 
+    .editorial-section {
+      padding-top: 24px;
+    }
+
+    .quote-inline {
+      max-width: 820px;
+    }
+
+    .quote-inline p {
+      margin: 0;
+      color: var(--text);
+      font-size: clamp(1.55rem, 3vw, 2.2rem);
+      line-height: 1.35;
+    }
+
+    .quote-author {
+      display: block;
+      margin-top: 14px;
+      color: var(--gold);
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .editorial-divider {
+      width: 72px;
+      height: 2px;
+      margin: 30px 0;
+      background: var(--gold);
+    }
+
     .editorial-panel {
       padding: 52px 56px;
     }
@@ -694,13 +726,25 @@
       </div>
     </section>
 
-    <section>
+    <section class="editorial-section">
       <div class="wrap">
-        <div class="quote">
-          <p>
-            “Authority can produce compliance. Trusted intent produces commitment.”
+        <div class="panel editorial-panel">
+          <div class="quote-inline">
+            <p>“To be trusted is a greater compliment than to be loved.”</p>
+            <small class="quote-author">— George MacDonald</small>
+          </div>
+
+          <div class="editorial-divider"></div>
+
+          <h2 class="section-title">The heart of trusted leadership</h2>
+
+          <p class="section-copy editorial-copy">
+            Few statements capture the heart of leadership more clearly.
           </p>
-          <small>Trusted Intent</small>
+
+          <p class="section-copy editorial-copy">
+            People may admire authority, respect competence, or even appreciate charisma, but trust is earned differently. Trust is built over time through character, consistency, humility, sacrifice, and genuine care for others. Ultimately, people follow those whose intent they trust when it matters most.
+          </p>
         </div>
       </div>
     </section>
